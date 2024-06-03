@@ -85,7 +85,22 @@ $result = mysqli_query($conn, $sql);
           unset($_SESSION["create"]);
           ?>
         </div>
+        
       <?php endif; ?>
+        
+        <?php if (isset($_SESSION["update"])): ?>
+            <div class="alert alert-success">
+                <?php echo $_SESSION["update"]; ?>
+            </div>
+            <?php unset($_SESSION["update"]); ?>
+        <?php endif; ?>
+        
+        <?php if (isset($_SESSION["delete"])): ?>
+            <div class="alert alert-success">
+                <?php echo $_SESSION["delete"]; ?>
+            </div>
+            <?php unset($_SESSION["delete"]); ?>
+        <?php endif; ?>
       <?php if (isset($_SESSION["error"])): ?>
         <div class="alert alert-danger">
           <?php 

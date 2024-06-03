@@ -7,21 +7,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <title>Edit Transaction</title>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- Bootstrap Bundle JS (includes Popper) -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Bootstrap Datepicker CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-
-    <!-- Bootstrap Datepicker JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-
     <!-- Custom CSS to adjust datepicker size -->
     <style>
         .datepicker {
@@ -29,15 +14,73 @@
         }
     </style>
 </head>
+
+<?php include 'includes/header.php'; ?>
+<link rel="stylesheet" href="assets/css/templatemo-softy-pinko.css"
 <body>
-<div class="container my-5">
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+
+  <ul class="sidebar-nav" id="sidebar-nav">
+
+    
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="index1.php">
+        <i class="bi bi-grid"></i><span>Dashboard</span>
+      </a>
+    </li><!-- End Tables Nav -->
+
+
+   <li class="nav-item">
+  <a class="nav-link" href="transaction.php">
+    <i class="bi bi-menu-button-wide"></i><span>Transaction</span>
+  </a>
+</li>
+<!-- End Components Nav -->
+
+    <li class="nav-item">
+    <a class="nav-link collapsed" href="book1.php">
+        <i class="bi bi-journal-text"></i><span>Books</span>
+      </a>
+    </li><!-- End Forms Nav -->
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="member1.php">
+        <i class="bi bi-layout-text-window-reverse"></i>
+        
+        <span>Members</span>
+      </a>
+    </li>
+
+
+    <li class="nav-item">
+    <a class="nav-link collapsed" href="librarian.php">
+        <i class="bi bi-layout-text-window-reverse"></i><span>Librarian</span>
+      </a>
+    </li><!-- End Tables Nav --><!-- End Tables Nav -->
+  </ul>
+
+</aside>
+<main id="main" class="main">
+  <div class="pagetitle">
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index1.php">Home</a></li>
+        <li class="breadcrumb-item active">Transaction</li>
+        <li class="breadcrumb-item active">Edit Transaction</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+<div class="container my-4">
     <header class="d-flex justify-content-between my-4">
         <h1>Edit Transaction</h1>
         <div>
-            <a href="transaction.php" class="btn btn-primary">Back</a>
+            <a href="transaction.php" class="btn btn-pink">Back</a>
         </div>
     </header>
     <form action="processcheckout.php" method="post">
+
         <?php 
         include("includes/connect.php");
         if (isset($_GET['id'])) {
@@ -86,7 +129,7 @@
             </div>
             <input type="hidden" value="<?php echo $checkout_id; ?>" name="checkout_id">
             <div class="form-element my-4">
-                <input type="submit" name="edit" value="Edit Transaction" class="btn btn-primary">
+                <input type="submit" name="edit" value="Edit Transaction" class="btn btn-pink">
             </div>
         <?php
             } else {
