@@ -12,7 +12,7 @@
     <header class="d-flex justify-content-between my-4">
             <h1>Add New Member</h1>
             <div>
-            <a href="members.php" class="btn btn-primary">Back</a>
+            <a href="member1.php" class="btn btn-primary">Back</a>
             </div>
         </header>
         
@@ -26,9 +26,9 @@
             <div class="form-group my-4">
                 <label for="membership_type">Membership Type</label>
                 <select class="form-control" name="membership_type" id="membership_type">
-                    <option value="Basic">Basic</option>
-                    <option value="Student">Student</option>
-                    <option value="Student">Premium</option>
+                <option value="Student">Student</option>
+                    <option value="Faculty">Faculty</option>
+                    <option value="Alumni">Alumni</option>
                 </select>
             </div>
         

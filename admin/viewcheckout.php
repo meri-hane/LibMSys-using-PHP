@@ -4,7 +4,7 @@
         <header class="d-flex justify-content-between my-4">
             <h1>Transaction Details</h1>
             <div>
-                <a href="checkout.php" class="btn btn-primary">Back</a>
+                <a href="transaction.php" class="btn btn-primary">Back</a>
             </div>
         </header>
         <div class="member-details p-5 my-4">

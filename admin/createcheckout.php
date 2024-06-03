@@ -12,7 +12,7 @@
         <header class="d-flex justify-content-between my-4">
             <h1>Checkout Book</h1>
             <div>
-                <a href="checkout.php" class="btn btn-primary">Back</a>
+                <a href="transaction.php" class="btn btn-primary">Back</a>
             </div>
         </header>
         

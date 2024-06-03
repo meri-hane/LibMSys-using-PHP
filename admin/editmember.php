@@ -12,7 +12,7 @@
         <header class="d-flex justify-content-between my-4">
             <h1>Edit Member</h1>
             <div>
-                <a href="members.php" class="btn btn-primary">Back</a>
+                <a href="member1.php" class="btn btn-primary">Back</a>
             </div>
         </header>
         <form action="processmember.php" method="post">
@@ -33,9 +33,9 @@
                 <div class="form-group my-4">
                 <label for="membership_type">Membership Type</label>
                 <select class="form-control" name="membership_type" id="membership_type" required>
-                         <option value="Basic" <?php if($row['membership_type'] == 'Basic') echo 'selected'; ?>>Basic</option>
                          <option value="Student" <?php if($row['membership_type'] == 'Student') echo 'selected'; ?>>Student</option>
-                         <option value="Premium" <?php if($row['membership_type'] == 'Premium') echo 'selected'; ?>>Premium</option>
+                         <option value="Faculty" <?php if($row['membership_type'] == 'Faculty') echo 'selected'; ?>>Faculty</option>
+                         <option value="Alumni" <?php if($row['membership_type'] == 'Alumni') echo 'selected'; ?>>Alumni</option>
                 </select>
             </div>
         

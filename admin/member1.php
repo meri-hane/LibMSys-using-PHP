@@ -84,9 +84,11 @@ $result = mysqli_query($conn, $sql);
   <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/templatemo-softy-pinko.css">
 
   <!-- Template Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/templatemo-softy-pinko.css">
 
 </head>
 
@@ -146,12 +148,12 @@ $result = mysqli_query($conn, $sql);
 
   <ul class="sidebar-nav" id="sidebar-nav">
 
-    <li class="nav-item">
-      <a class="nav-link" href="index1.php">
-        <i class="bi bi-grid"></i>
-        <span>Dashboard</span>
+    
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="index1.php">
+        <i class="bi bi-grid"></i><span>Dashboard</span>
       </a>
-    </li><!-- End Dashboard Nav -->
+    </li><!-- End Tables Nav -->
 
 
    <li class="nav-item">
@@ -168,25 +170,27 @@ $result = mysqli_query($conn, $sql);
     </li><!-- End Forms Nav -->
 
     <li class="nav-item">
-    <a class="nav-link collapsed" href="member1.php">
-        <i class="bi bi-layout-text-window-reverse"></i><span>Members</span>
+      <a class="nav-link" href="member1.php">
+        <i class="bi bi-layout-text-window-reverse"></i>
+        
+        <span>Members</span>
       </a>
-    </li><!-- End Tables Nav -->
+    </li>
+
 
     <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+    <a class="nav-link collapsed" href="librarian.php">
         <i class="bi bi-layout-text-window-reverse"></i><span>Librarian</span>
       </a>
-    </li><!-- End Tables Nav -->
+    </li><!-- End Tables Nav --><!-- End Tables Nav -->
   </ul>
 
-</aside><!-- End Sidebar-->
-
+</aside>
 
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Member List</h1>
+   
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index1.php">Home</a></li>
@@ -194,7 +198,10 @@ $result = mysqli_query($conn, $sql);
         </ol>
       </nav>
 
-      <div class="d-flex">
+      <div class="container my-4">
+<header class="d-flex justify-content-between align-items-center my-4">
+        <h1>Member List</h1>
+        <div class="d-flex">
             <form method="GET" action="members.php" class="me-2">
                 <div class="input-group">
                     <input type="text" name="search" class="form-control" placeholder="Search for members..." value="<?php echo htmlspecialchars($search_query); ?>">
@@ -203,7 +210,7 @@ $result = mysqli_query($conn, $sql);
             </form>
             <button type="button" class="btn btn-pink" data-bs-toggle="modal" data-bs-target="#addMemberModal">Add New Member</button> <!-- Changed to light pink button -->
                </div>
-    </div><!-- End Page Title -->
+    </header>
 
     <?php if (isset($_SESSION["create"])): ?>
             <div class="alert alert-success">
@@ -230,8 +237,20 @@ $result = mysqli_query($conn, $sql);
         $start_result = $starting_limit + 1;
         $end_result = min($starting_limit + $results_per_page, $total_results);
         ?>
+
+<?php if (isset($_SESSION["error"])): ?>
+    <div class="alert alert-danger"><?php echo $_SESSION["error"]; ?></div>
+    <?php unset($_SESSION["error"]); ?>
+<?php endif; ?>
         
         <table class="table table-bordered table-girly">
+        <colgroup>
+        <col style="width: 5%;">
+        <col style="width: 20%;">
+        <col style="width: 20%;">
+        <col style="width: 20%;">
+        <col style="width: 10%;">
+    </colgroup>
         <thead>
             <tr>
                 <th><a href="?<?php echo http_build_query(array_merge($_GET, ['sort_field' => 'member_id', 'sort_order' => ($sort_field == 'member_id' && $sort_order == 'ASC') ? 'DESC' : 'ASC'])); ?>" class="sort-link">ID<?php echo $sort_field == 'member_id' ? ($sort_order == 'ASC' ? ' <i class="fa fa-arrow-up sort-icon"></i>' : ' <i class="fa fa-arrow-down sort-icon"></i>') : ''; ?></a></th>
@@ -291,9 +310,9 @@ $result = mysqli_query($conn, $sql);
                             <div class="form-group my-4">
                 <label for="membership_type">Membership Type</label>
                 <select class="form-control" name="membership_type" id="membership_type">
-                    <option value="Basic">Basic</option>
                     <option value="Student">Student</option>
-                    <option value="Student">Premium</option>
+                    <option value="Faculty">Faculty</option>
+                    <option value="Alumni">Alumni</option>
                 </select>
             </div>
                             <div class="form-element my-4">
@@ -304,6 +323,8 @@ $result = mysqli_query($conn, $sql);
                 </div>
             </div>
         </div>
+        </div>
+                </div>
   
   </main><!-- End #main -->
 

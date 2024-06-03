@@ -87,6 +87,9 @@ $result = mysqli_query($conn, $sql);
 
   <!-- Template Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
+ 
+  
+    <link rel="stylesheet" href="assets/css/templatemo-softy-pinko.css">
 
 </head>
 
@@ -146,12 +149,12 @@ $result = mysqli_query($conn, $sql);
 
   <ul class="sidebar-nav" id="sidebar-nav">
 
-    <li class="nav-item">
-      <a class="nav-link" href="index1.php">
-        <i class="bi bi-grid"></i>
-        <span>Dashboard</span>
+    
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="index1.php">
+        <i class="bi bi-grid"></i><span>Dashboard</span>
       </a>
-    </li><!-- End Dashboard Nav -->
+    </li><!-- End Tables Nav -->
 
 
    <li class="nav-item">
@@ -162,31 +165,33 @@ $result = mysqli_query($conn, $sql);
 <!-- End Components Nav -->
 
     <li class="nav-item">
-    <a class="nav-link collapsed" href="book1.php">
+    <a class="nav-link" href="book1.php">
         <i class="bi bi-journal-text"></i><span>Books</span>
       </a>
     </li><!-- End Forms Nav -->
 
     <li class="nav-item">
-    <a class="nav-link collapsed" href="member1.php">
-        <i class="bi bi-layout-text-window-reverse"></i><span>Members</span>
+      <a class="nav-link collapsed" href="member1.php">
+        <i class="bi bi-layout-text-window-reverse"></i>
+        
+        <span>Members</span>
       </a>
-    </li><!-- End Tables Nav -->
+    </li>
+
 
     <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+    <a class="nav-link collapsed" href="librarian.php">
         <i class="bi bi-layout-text-window-reverse"></i><span>Librarian</span>
       </a>
-    </li><!-- End Tables Nav -->
+    </li><!-- End Tables Nav --><!-- End Tables Nav -->
   </ul>
 
-</aside><!-- End Sidebar-->
+</aside>
 
 
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Book List</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index1.php">Home</a></li>
@@ -194,8 +199,11 @@ $result = mysqli_query($conn, $sql);
         </ol>
       </nav>
 
-      <div class="d-flex">
-                <form method="GET" action="book1.php" class="me-2">
+      <div class="container my-4">
+        <header class="d-flex justify-content-between align-items-center my-4">
+            <h1>Book List</h1>
+            <div class="d-flex">
+                <form method="GET" action="book.php" class="me-2">
                     <div class="input-group">
                         <input type="text" name="search" class="form-control" placeholder="Search for books..." value="<?php echo htmlspecialchars($search_query); ?>">
                         <button type="submit" class="btn btn-pink">Search</button>
@@ -203,7 +211,7 @@ $result = mysqli_query($conn, $sql);
                 </form>
                 <button type="button" class="btn btn-pink" data-bs-toggle="modal" data-bs-target="#addBookModal">Add New Book</button> <!-- Changed to light pink button -->
             </div>
-    </div><!-- End Page Title -->
+        </header>
 
     <?php if (isset($_SESSION["create"])): ?>
             <div class="alert alert-success">
@@ -232,6 +240,13 @@ $result = mysqli_query($conn, $sql);
         ?>
         
         <table class="table table-bordered table-girly"> <!-- Added girly table styling -->
+          <colgroup>
+        <col style="width: 5%;">
+        <col style="width: 30%;">
+        <col style="width: 25%;">
+        <col style="width: 20%;">
+        <col style="width: 10%;">
+    </colgroup>
             <thead>
                 <tr>
                     <th><a href="?<?php echo http_build_query(array_merge($_GET, ['sort_field' => 'book_id', 'sort_order' => ($sort_field == 'book_id' && $sort_order == 'ASC') ? 'DESC' : 'ASC'])); ?>" class="sort-link">ID<?php echo $sort_field == 'book_id' ? ($sort_order == 'ASC' ? ' <i class="fa fa-arrow-up sort-icon"></i>' : ' <i class="fa fa-arrow-down sort-down sort-icon"></i>') : ''; ?></a></th>
@@ -303,6 +318,8 @@ $result = mysqli_query($conn, $sql);
                 </div>
             </div>
         </div>
+                </div>
+                </div>
   
   </main><!-- End #main -->
 

@@ -7,7 +7,7 @@ if (isset($_GET['id'])) {
     if(mysqli_query($conn, $sql)){
         session_start();
         $_SESSION["delete"] = "Member Deleted Successfully!";
-        header("Location: members.php");
+        header("Location: member1.php");
     } else {
         die("Something went wrong");
     }

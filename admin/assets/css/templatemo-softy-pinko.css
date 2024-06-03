@@ -889,7 +889,7 @@ a.sort-link {
 }
 
 .pagination .page-item.active .page-link {
-  background-color: pink !important; /* Change pagination box background color to pink when clicked */
+  background-color: rgb(255, 192, 203) !important; /* Change pagination box background color to pink when clicked */
   border-color: pink !important; /* Change border color to pink when clicked */
 }
 

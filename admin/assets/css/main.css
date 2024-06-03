@@ -389,9 +389,9 @@
   
   .header .toggle-sidebar-btn {
     font-size: 32px;
-    padding-left: 10px;
+    padding-left: 5px;
     cursor: pointer;
-    color: #012970;
+    color:#ff69b4;
   }
   
   .header .search-bar {
