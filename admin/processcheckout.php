@@ -4,36 +4,46 @@ session_start();
 
 
 if (isset($_POST['create'])) {
-    $book_isbn = $_POST['book_isbn'];
-    $member_id = $_POST['member_id'];
-    $borrow_date = $_POST['borrow_date'];
+    $book_title = mysqli_real_escape_string($conn, $_POST['book_title']);
+    $member_lname = mysqli_real_escape_string($conn, $_POST['member_lname']);
+    $borrow_date = mysqli_real_escape_string($conn, $_POST['borrow_date']);
     $borrow_librarian_id = mysqli_real_escape_string($conn, $_POST['borrow_librarian_id']);
-    $statuss = $_POST['statuss']; // Assign statuss here
+    $statuss = 'Borrowed';
 
-    // Convert book ISBN to book ID
-    $book_result = mysqli_query($conn, "SELECT book_id FROM books WHERE isbn='$book_isbn'");
+    // Retrieve book ID based on book title
+    $book_query = "SELECT book_id FROM books WHERE title = '$book_title' LIMIT 1";
+    $book_result = mysqli_query($conn, $book_query);
     if ($book_result && mysqli_num_rows($book_result) > 0) {
-        $book_row = mysqli_fetch_assoc($book_result);
-        $book_id = $book_row['book_id'];
-
-        // Check if the book is already borrowed and not yet returned
-        $checkout_result = mysqli_query($conn, "SELECT * FROM checkouts WHERE book_id='$book_id' AND statuss='Borrowed'");
-        if ($checkout_result && mysqli_num_rows($checkout_result) > 0) {
-            $_SESSION["error"] = "This book is already borrowed by another member.";
-        } else {
-            // Insert new checkout
-            $sql = "INSERT INTO checkouts (book_id, member_id, borrow_date, borrow_librarian_id, statuss) VALUES ('$book_id', '$member_id', '$borrow_date', '$borrow_librarian_id', '$statuss')";
-            if (mysqli_query($conn, $sql)) {
-                $_SESSION["create"] = "New checkout has been added successfully.";
-            } else {
-                $_SESSION["error"] = "Error: " . $sql . "<br>" . mysqli_error($conn);
-            }
-        }
+        $book_data = mysqli_fetch_assoc($book_result);
+        $book_id = $book_data['book_id'];
     } else {
-        $_SESSION["error"] = "Invalid Book ISBN.";
+        $_SESSION['error'] = 'Book not found.';
+        header('Location: transaction.php');
+        exit();
     }
-    header("Location: transaction.php");
-    exit();
+
+    // Retrieve member ID based on member last name
+    $member_query = "SELECT member_id FROM members WHERE lname = '$member_lname' LIMIT 1";
+    $member_result = mysqli_query($conn, $member_query);
+    if ($member_result && mysqli_num_rows($member_result) > 0) {
+        $member_data = mysqli_fetch_assoc($member_result);
+        $member_id = $member_data['member_id'];
+    } else {
+        $_SESSION['error'] = 'Member not found.';
+        header('Location: transaction.php');
+        exit();
+    }
+
+    $sql = "INSERT INTO checkouts (book_id, member_id, borrow_date, statuss, borrow_librarian_id) 
+            VALUES ('$book_id', '$member_id', '$borrow_date', '$statuss', '$borrow_librarian_id')";
+
+    if (mysqli_query($conn, $sql)) {
+        $_SESSION['create'] = 'New transaction has been added successfully.';
+    } else {
+        $_SESSION['error'] = 'Error adding new transaction: ' . mysqli_error($conn);
+    }
+
+    header('Location: transaction.php');
 }
 
 if (isset($_POST['edit'])) {
