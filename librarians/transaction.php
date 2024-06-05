@@ -1,9 +1,9 @@
 <?php
 session_start(); // Start the session before any output
 include('includes/connect.php');
-// Check if admin is not logged in, redirect to login.php if not
-if(!isset($_SESSION['admin'])) {
-    header("Location: login.php");
+// Check if librarian is not logged in, redirect to login page
+if (!isset($_SESSION['librarian_id'])) {
+    header('Location: login.php');
     exit();
 }
 
@@ -102,13 +102,6 @@ $result = mysqli_query($conn, $sql);
         <span>Members</span>
       </a>
     </li>
-
-
-    <li class="nav-item">
-    <a class="nav-link collapsed" href="librarian.php">
-        <i class="bi bi-layout-text-window-reverse"></i><span>Librarian</span>
-      </a>
-    </li><!-- End Tables Nav --><!-- End Tables Nav -->
   </ul>
 
 </aside>
@@ -170,7 +163,6 @@ $result = mysqli_query($conn, $sql);
 
         <table class="table table-bordered table-girly">
             <colgroup>
-        <col style="width: 5%;">
         <col style="width: 20%;">
         <col style="width: 20%;">
         <col style="width: 15%;">
@@ -180,7 +172,6 @@ $result = mysqli_query($conn, $sql);
     </colgroup>
     <thead>
     <tr>
-        <th>ID</th>
         <th>Book Title</th>
         <th>Member Name</th>
         <th>Date Borrow</th>
@@ -194,7 +185,6 @@ $result = mysqli_query($conn, $sql);
 <tbody>
 <?php while($data = mysqli_fetch_array($result)): ?>
     <tr>
-        <td><?= $data['checkout_id']; ?></td>
         <td><?= $data['book_title']; ?></td>
         <td><?= $data['member_lname']; ?></td>
         <td><?= $data['borrow_date']; ?></td>
@@ -205,7 +195,6 @@ $result = mysqli_query($conn, $sql);
         <td>
             <a href="viewcheckout.php?id=<?= $data['checkout_id']; ?>" class="btn btn-pink">Read More</a>
             <a href="editcheckout.php?id=<?= $data['checkout_id']; ?>" class="btn btn-warning">Edit</a>
-            <a href="deletecheckout.php?id=<?= $data['checkout_id']; ?>" class="btn btn-danger">Delete</a>
         </td>
     </tr>
 <?php endwhile; ?>

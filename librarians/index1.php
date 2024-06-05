@@ -1,6 +1,8 @@
 <?php
 include('includes/connect.php');
 
+
+
 // Fetch the counts from the database
 $sqlBooksCount = "SELECT COUNT(*) AS total_books FROM books";
 $sqlMembersCount = "SELECT COUNT(*) AS total_members FROM members";
@@ -129,11 +131,6 @@ while ($row = mysqli_fetch_assoc($resultMembershipCount)) {
       </a>
     </li><!-- End Tables Nav -->
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="librarian.php">
-        <i class="bi bi-layout-text-window-reverse"></i><span>Librarian</span>
-      </a>
-    </li><!-- End Tables Nav -->
   </ul>
 
 </aside><!-- End Sidebar-->
@@ -158,73 +155,56 @@ while ($row = mysqli_fetch_assoc($resultMembershipCount)) {
       <div class="col-lg-12">
         <div class="row">
 
-          <!-- Books Card -->
-          <div class="col-xxl-3 col-md-3">
-            <div class="card info-card sales-card">
-              <div class="card-body">
-                <h5 class="card-title">Books <span>| Total</span></h5>
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-book"></i>
-                  </div>
-                  <div class="ps-3">
-                    <h6><?php echo $countBooks; ?></h6>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div><!-- End Books Card -->
+         <!-- Books Card -->
+  <div class="col-lg-4 col-md-4">
+    <div class="card info-card sales-card">
+      <div class="card-body">
+        <h5 class="card-title">Books <span>| Total</span></h5>
+        <div class="d-flex align-items-center">
+          <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+            <i class="bi bi-book"></i>
+          </div>
+          <div class="ps-3">
+            <h6><?php echo $countBooks; ?></h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- End Books Card -->
 
-          <!-- Members Card -->
-          <div class="col-xxl-3 col-md-3">
-            <div class="card info-card sales-card">
-              <div class="card-body">
-                <h5 class="card-title">Members <span>| Total</span></h5>
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-person"></i>
-                  </div>
-                  <div class="ps-3">
-                    <h6><?php echo $countMembers; ?></h6>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div><!-- End Members Card -->
+  <!-- Members Card -->
+  <div class="col-lg-4 col-md-4">
+    <div class="card info-card sales-card">
+      <div class="card-body">
+        <h5 class="card-title">Members <span>| Total</span></h5>
+        <div class="d-flex align-items-center">
+          <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+            <i class="bi bi-person"></i>
+          </div>
+          <div class="ps-3">
+            <h6><?php echo $countMembers; ?></h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- End Members Card -->
 
-          <!-- Librarians Card -->
-          <div class="col-xxl-3 col-md-3">
-            <div class="card info-card sales-card">
-              <div class="card-body">
-                <h5 class="card-title">Librarians <span>| Total</span></h5>
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-person"></i>
-                  </div>
-                  <div class="ps-3">
-                    <h6><?php echo $countLibrarians; ?></h6>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div><!-- End Librarians Card -->
-
-          <!-- Checkouts Card -->
-          <div class="col-xxl-3 col-md-3">
-            <div class="card info-card customers-card">
-              <div class="card-body">
-                <h5 class="card-title">Checkout <span>| Total</span></h5>
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-journal-check"></i>
-                  </div>
-                  <div class="ps-3">
-                    <h6><?php echo $countCheckouts; ?></h6>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div><!-- End Checkouts Card -->
+  <!-- Checkouts Card -->
+  <div class="col-lg-4 col-md-4">
+    <div class="card info-card customers-card">
+      <div class="card-body">
+        <h5 class="card-title">Checkout <span>| Total</span></h5>
+        <div class="d-flex align-items-center">
+          <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+            <i class="bi bi-journal-check"></i>
+          </div>
+          <div class="ps-3">
+            <h6><?php echo $countCheckouts; ?></h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- End Checkouts Card --
 
           <!-- Reports -->
           <div class="col-12">

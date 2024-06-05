@@ -1,12 +1,11 @@
 <?php
 session_start(); // Start the session before any output
 include('includes/connect.php');
-// Check if admin is not logged in, redirect to login.php if not
-if(!isset($_SESSION['admin'])) {
-    header("Location: login.php");
+// Check if librarian is not logged in, redirect to login page
+if (!isset($_SESSION['librarian_id'])) {
+    header('Location: login.php');
     exit();
 }
-
 // Define how many results you want per page
 $results_per_page = 10;
 
@@ -96,13 +95,6 @@ $result = mysqli_query($conn, $sql);
         <span>Members</span>
       </a>
     </li>
-
-
-    <li class="nav-item">
-    <a class="nav-link collapsed" href="librarian.php">
-        <i class="bi bi-layout-text-window-reverse"></i><span>Librarian</span>
-      </a>
-    </li><!-- End Tables Nav --><!-- End Tables Nav -->
   </ul>
 
 </aside>
@@ -147,13 +139,6 @@ $result = mysqli_query($conn, $sql);
             </div>
             <?php unset($_SESSION["update"]); ?>
         <?php endif; ?>
-        
-        <?php if (isset($_SESSION["delete"])): ?>
-            <div class="alert alert-success">
-                <?php echo $_SESSION["delete"]; ?>
-            </div>
-            <?php unset($_SESSION["delete"]); ?>
-        <?php endif; ?>
 
         <?php
         $start_result = $starting_limit + 1;
@@ -162,7 +147,6 @@ $result = mysqli_query($conn, $sql);
         
         <table class="table table-bordered table-girly"> <!-- Added girly table styling -->
           <colgroup>
-        <col style="width: 5%;">
         <col style="width: 30%;">
         <col style="width: 25%;">
         <col style="width: 20%;">
@@ -170,7 +154,6 @@ $result = mysqli_query($conn, $sql);
     </colgroup>
             <thead>
                 <tr>
-                    <th><a href="?<?php echo http_build_query(array_merge($_GET, ['sort_field' => 'book_id', 'sort_order' => ($sort_field == 'book_id' && $sort_order == 'ASC') ? 'DESC' : 'ASC'])); ?>" class="sort-link">ID<?php echo $sort_field == 'book_id' ? ($sort_order == 'ASC' ? ' <i class="fa fa-arrow-up sort-icon"></i>' : ' <i class="fa fa-arrow-down sort-down sort-icon"></i>') : ''; ?></a></th>
                     <th><a href="?<?php echo http_build_query(array_merge($_GET, ['sort_field' => 'title', 'sort_order' => ($sort_field == 'title' && $sort_order == 'ASC') ? 'DESC' : 'ASC'])); ?>" class="sort-link">Title<?php echo $sort_field == 'title' ? ($sort_order == 'ASC' ? ' <i class="fa fa-arrow-up sort-icon"></i>' : ' <i class="fa fa-arrow-down sort-icon"></i>') : ''; ?></a></th>
                     <th><a href="?<?php echo http_build_query(array_merge($_GET, ['sort_field' => 'author', 'sort_order' => ($sort_field == 'author' && $sort_order == 'ASC') ? 'DESC' : 'ASC'])); ?>" class="sort-link">Author<?php echo $sort_field == 'author' ? ($sort_order == 'ASC' ? ' <i class="fa fa-arrow-up sort-icon"></i>' : ' <i class="fa fa-arrow-down sort-icon"></i>') : ''; ?></a></th>
                     <th><a href="?<?php echo http_build_query(array_merge($_GET, ['sort_field' => 'isbn', 'sort_order' => ($sort_field == 'isbn' && $sort_order == 'ASC') ? 'DESC' : 'ASC'])); ?>" class="sort-link">ISBN<?php echo $sort_field == 'isbn' ? ($sort_order == 'ASC' ? ' <i class="fa fa-arrow-up sort-icon"></i>' : ' <i class="fa fa-arrow-down sort-icon"></i>') : ''; ?></a></th>
@@ -182,14 +165,12 @@ $result = mysqli_query($conn, $sql);
             while($data = mysqli_fetch_array($result)){
                 ?>
                 <tr>
-                    <td><?php echo $data['book_id']; ?></td>
                     <td><?php echo $data['title']; ?></td>
                     <td><?php echo $data['author']; ?></td>
                     <td><?php echo substr($data['isbn'], 0, 15); ?></td> <!-- Limiting to 15 characters -->
                     <td>
                         <a href="viewbook.php?id=<?php echo $data['book_id']; ?>" class="btn btn-pink">Read More</a> <!-- Changed to light pink button -->
                         <a href="editbook.php?id=<?php echo $data['book_id']; ?>" class="btn btn-warning">Edit</a>
-                        <a href="deletebook.php?id=<?php echo $data['book_id']; ?>" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
                 <?php

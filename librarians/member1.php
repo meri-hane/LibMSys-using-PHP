@@ -1,12 +1,11 @@
 <?php
 session_start(); // Start the session before any output
 include('includes/connect.php');
-// Check if admin is not logged in, redirect to login.php if not
-if(!isset($_SESSION['admin'])) {
-    header("Location: login.php");
+// Check if librarian is not logged in, redirect to login page
+if (!isset($_SESSION['librarian_id'])) {
+    header('Location: login.php');
     exit();
 }
-
 // Define how many results you want per page
 $results_per_page = 10;
 
@@ -95,13 +94,6 @@ $result = mysqli_query($conn, $sql);
         <span>Members</span>
       </a>
     </li>
-
-
-    <li class="nav-item">
-    <a class="nav-link collapsed" href="librarian.php">
-        <i class="bi bi-layout-text-window-reverse"></i><span>Librarian</span>
-      </a>
-    </li><!-- End Tables Nav --><!-- End Tables Nav -->
   </ul>
 
 </aside>
@@ -145,13 +137,6 @@ $result = mysqli_query($conn, $sql);
             </div>
             <?php unset($_SESSION["update"]); ?>
         <?php endif; ?>
-        
-        <?php if (isset($_SESSION["delete"])): ?>
-            <div class="alert alert-success">
-                <?php echo $_SESSION["delete"]; ?>
-            </div>
-            <?php unset($_SESSION["delete"]); ?>
-        <?php endif; ?>
 
         <?php
         $start_result = $starting_limit + 1;
@@ -165,7 +150,6 @@ $result = mysqli_query($conn, $sql);
         
         <table class="table table-bordered table-girly">
         <colgroup>
-        <col style="width: 5%;">
         <col style="width: 20%;">
         <col style="width: 20%;">
         <col style="width: 20%;">
@@ -173,7 +157,6 @@ $result = mysqli_query($conn, $sql);
     </colgroup>
         <thead>
             <tr>
-                <th><a href="?<?php echo http_build_query(array_merge($_GET, ['sort_field' => 'member_id', 'sort_order' => ($sort_field == 'member_id' && $sort_order == 'ASC') ? 'DESC' : 'ASC'])); ?>" class="sort-link">ID<?php echo $sort_field == 'member_id' ? ($sort_order == 'ASC' ? ' <i class="fa fa-arrow-up sort-icon"></i>' : ' <i class="fa fa-arrow-down sort-icon"></i>') : ''; ?></a></th>
                 <th><a href="?<?php echo http_build_query(array_merge($_GET, ['sort_field' => 'fname', 'sort_order' => ($sort_field == 'fname' && $sort_order == 'ASC') ? 'DESC' : 'ASC'])); ?>" class="sort-link">First Name<?php echo $sort_field == 'fname' ? ($sort_order == 'ASC' ? ' <i class="fa fa-arrow-up sort-icon"></i>' : ' <i class="fa fa-arrow-down sort-icon"></i>') : ''; ?></a></th>
                 <th><a href="?<?php echo http_build_query(array_merge($_GET, ['sort_field' => 'lname', 'sort_order' => ($sort_field == 'lname' && $sort_order == 'ASC') ? 'DESC' : 'ASC'])); ?>" class="sort-link">Last Name<?php echo $sort_field == 'lname' ? ($sort_order == 'ASC' ? ' <i class="fa fa-arrow-up sort-icon"></i>' : ' <i class="fa fa-arrow-down sort-icon"></i>') : ''; ?></a></th>
                 <th><a href="?<?php echo http_build_query(array_merge($_GET, ['sort_field' => 'membership_type', 'sort_order' => ($sort_field == 'membership_type' && $sort_order == 'ASC') ? 'DESC' : 'ASC'])); ?>" class="sort-link">Membership Type<?php echo $sort_field == 'membership_type' ? ($sort_order == 'ASC' ? ' <i class="fa fa-arrow-up sort-icon"></i>' : ' <i class="fa fa-arrow-down sort-icon"></i>') : ''; ?></a></th>
@@ -185,13 +168,11 @@ $result = mysqli_query($conn, $sql);
         while($data = mysqli_fetch_array($result)){
             ?>
             <tr>
-                <td><?php echo $data['member_id']; ?></td>
                 <td><?php echo $data['fname']; ?></td>
                 <td><?php echo $data['lname']; ?></td>
                 <td><?php echo $data['membership_type']; ?></td>
                 <td>
                     <a href="editmember.php?id=<?php echo $data['member_id']; ?>" class="btn btn-warning">Edit</a>
-                    <a href="deletemember.php?id=<?php echo $data['member_id']; ?>" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
             <?php
