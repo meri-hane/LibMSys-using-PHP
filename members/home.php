@@ -94,24 +94,51 @@ $result = mysqli_query($conn, $sql);
 <?php include 'includes/header.php'; ?>
 <link rel="stylesheet" href="assets/css/templatemo-softy-pinko.css">
 
-        <?php
-        $start_result = $starting_limit + 1;
-        $end_result = min($starting_limit + $results_per_page, $total_results);
-        ?>
-       
-<header>
-  <div class="container my-4">
-    <header class="d-flex justify-content-between align-items-center my-4">
-        <div class="d-flex">
-            <form method="GET" action="index.php" class="me-2">
-                <div class="input-group">
-                    <input type="text" name="search" class="form-control" placeholder="Search for books..." value="<?php echo htmlspecialchars($search_query); ?>">
-                    <button type="submit" class="btn btn-pink">Search</button>
-                </div>
-            </form>   
-        </div>
-    </header>
+<header id="header" class="header fixed-top d-flex align-items-center justify-content-between">
+  <!-- Logo pic -->
+  <img src="assets/img/new_logo.png" alt="Logo" class="logo-pic">
 
+  <!-- Navigation Links -->
+  <nav class="main-nav">
+    <ul class="nav justify-content-center">
+      <li class="nav-item">
+      <a class="nav-link" href="home.php" style="color: black;">Home</a>
+      </li>
+      <li class="nav-item">
+      <a class="nav-link" href="transaction.php" style="color: black;">Transaction</a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Profile Link and Logout Button -->
+  <div class="d-flex align-items-center">
+    <a href="https://github.com/meri-hane" target="_blank" class="nav-link nav-profile d-flex align-items-center pe-2">
+      <img src="assets/img/mjpic.jpg" alt="Profile" class="rounded-circle me-2" style="width: 40px; height: 40px;">
+      <span class="d-none d-md-block"><?php echo $member_name; ?></span>
+    </a>
+
+    <!-- Logout Link -->
+    <a href="logout.php" class="btn btn-danger ms-2" style="margin-right: 10px;">Logout</a>
+  </div>
+</header>
+
+
+
+<header class="d-flex justify-content-between align-items-center my-4">
+        <h2>Welcome, <?php echo $member_name; ?></h2>
+    </header>
+  
+
+  <div class="container my-4">
+  <div class="d-flex justify-content-between align-items-center my-4">
+    <h2>Welcome, <?php echo $member_name; ?></h2>
+    <form method="GET" action="home.php" class="me-2">
+      <div class="input-group">
+        <input type="text" name="search" class="form-control" placeholder="Search for books..." value="<?php echo htmlspecialchars($search_query); ?>">
+        <button type="submit" class="btn btn-pink">Search</button>
+      </div>
+    </form>
+  </div>
     <?php
     $start_result = $starting_limit + 1;
     $end_result = min($starting_limit + $results_per_page, $total_results);
@@ -160,8 +187,7 @@ $result = mysqli_query($conn, $sql);
             <?php endfor; ?>
         </ul>
     </nav>
-    
-            </header>
+
             </div>
 
 </body>
