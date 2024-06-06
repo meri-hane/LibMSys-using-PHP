@@ -1,9 +1,3 @@
-// Check if member is logged in
-if (!isset($_SESSION['librarian_id'])) {
-    header('Location: login.php');
-    exit();
-}
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -117,6 +111,12 @@ if (!isset($_SESSION['librarian_id'])) {
             <li class="dropdown-header">
               <h6>Librarian</h6>
               <span></span>
+            </li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="aboutme.php">
+                <i class="bi bi-person"></i>
+                <span>My Profile</span>
+              </a>
             </li>
             <li>
               <hr class="dropdown-divider">

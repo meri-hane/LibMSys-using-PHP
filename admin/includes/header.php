@@ -103,7 +103,7 @@
           </a> <!-- Link for the picture -->
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="https://github.com/meri-hane" target="_blank" data-bs-toggle="dropdown">
-            <span class="d-none d-md-block dropdown-toggle">Mary Jane P. Calulang</span>
+            <span class="d-none d-md-block dropdown-toggle">M. Calulang</span>
           </a> <!-- Link for the name -->
 
           <!-- Dropdown Menu -->
@@ -111,6 +111,15 @@
             <li class="dropdown-header">
               <h6>Developer</h6>
               <span>Admin</span>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="aboutme.php">
+                <i class="bi bi-person"></i>
+                <span>My Profile</span>
+              </a>
             </li>
             <li>
               <hr class="dropdown-divider">
