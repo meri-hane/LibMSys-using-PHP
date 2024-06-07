@@ -1,3 +1,22 @@
+<?php
+// Start session
+session_start();
+
+// Check if librarian is not logged in, redirect to login page
+if (!isset($_SESSION['librarian_id'])) {
+  header('Location: login.php');
+  exit();
+}
+
+include('includes/connect.php');
+// Retrieve member's name
+$librarian_id = $_SESSION['librarian_id'];
+$query_librarian = "SELECT name FROM librarians WHERE librarian_id = '$librarian_id'";
+$result_librarian = mysqli_query($conn, $query_librarian);
+$row_librarian = mysqli_fetch_assoc($result_librarian);
+$librarian_name = $row_librarian['name'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -102,10 +121,9 @@
             <img src="assets/img/mjpic.jpg" alt="Profile" class="rounded-circle me-2" style="width: 40px; height: 40px;"> <!-- Link for the picture -->
           </a> <!-- Link for the picture -->
 
-          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="https://github.com/meri-hane" target="_blank" data-bs-toggle="dropdown">
-            <span class="d-none d-md-block dropdown-toggle">Mary Jane P. Calulang</span>
-          </a> <!-- Link for the name -->
-
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" data-bs-toggle="dropdown">
+    <span class="d-none d-md-block dropdown-toggle"><?php echo $librarian_name; ?></span>
+</a> <!-- Link for the name -->
           <!-- Dropdown Menu -->
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">

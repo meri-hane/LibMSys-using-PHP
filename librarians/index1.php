@@ -1,6 +1,14 @@
 <?php
-include('includes/connect.php');
+// Start session
+session_start();
 
+// Check if librarian is not logged in, redirect to login page
+if (!isset($_SESSION['librarian_id'])) {
+  header('Location: login.php');
+  exit();
+}
+
+include('includes/connect.php');
 
 
 // Fetch the counts from the database

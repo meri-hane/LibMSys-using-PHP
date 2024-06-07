@@ -38,7 +38,7 @@ if (isset($_POST['create'])) {
 
 if (isset($_POST['edit'])) {
     $checkout_id = mysqli_real_escape_string($conn, $_POST["checkout_id"]);
-    $return_date = mysqli_real_escape_string($conn, $_POST["return_date"]);
+    $return_date = date("Y-m-d", strtotime($_POST["return_date"])); // Convert return date to Y-m-d format
     $return_librarian_id = mysqli_real_escape_string($conn, $_POST["return_librarian_id"]);
     $statuss = mysqli_real_escape_string($conn, $_POST["statuss"]);
 
@@ -76,5 +76,4 @@ if (isset($_POST['edit'])) {
         exit();
     }
 }
-
 ?>

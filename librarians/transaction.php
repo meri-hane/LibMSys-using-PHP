@@ -7,6 +7,14 @@ if (!isset($_SESSION['librarian_id'])) {
     exit();
 }
 
+// Retrieve librarian's name
+$librarian_id = $_SESSION['librarian_id'];
+$query_librarian = "SELECT name FROM librarians WHERE librarian_id = '$librarian_id'";
+$result_librarian = mysqli_query($conn, $query_librarian);
+$row_librarian = mysqli_fetch_assoc($result_librarian);
+$librarian_name = $row_librarian['name'];
+
+
 // Define how many results you want per page
 $results_per_page = 10;
 
@@ -162,14 +170,17 @@ $result = mysqli_query($conn, $sql);
 <?php endif; ?>
 
         <table class="table table-bordered table-girly">
-            <colgroup>
-        <col style="width: 20%;">
-        <col style="width: 20%;">
-        <col style="width: 15%;">
-        <col style="width: 15%;">
-        <col style="width: 15%;">
-        <col style="width: 10%;">
-    </colgroup>
+        <colgroup>
+    <col style="width: 12.5%;">
+    <col style="width: 12.5%;">
+    <col style="width: 12.5%;">
+    <col style="width: 12.5%;">
+    <col style="width: 12.5%;">
+    <col style="width: 12.5%;">
+    <col style="width: 12.5%;">
+    <col style="width: 12.5%;">
+</colgroup>
+
     <thead>
     <tr>
         <th>Book Title</th>
@@ -188,7 +199,8 @@ $result = mysqli_query($conn, $sql);
         <td><?= $data['book_title']; ?></td>
         <td><?= $data['member_lname']; ?></td>
         <td><?= $data['borrow_date']; ?></td>
-        <td><?= $data['borrow_librarian_name']; ?></td>
+        <td><?= $data['borrow_librarian_name'] ?: $librarian_name; ?></td>
+        <!-- Use the librarian's name fetched from the session if it's not available in the database -->
         <td><?= $data['return_date']; ?></td>
         <td><?= $data['return_librarian_name']; ?></td>
         <td><?= $data['statuss']; ?></td>
@@ -199,6 +211,7 @@ $result = mysqli_query($conn, $sql);
     </tr>
 <?php endwhile; ?>
 </tbody>
+
 
 
         </table>
@@ -233,20 +246,10 @@ $result = mysqli_query($conn, $sql);
                     <div class="form-group my-4">
                         <input type="text" class="form-control" name="borrow_date" id="borrow_date" placeholder="Borrow Date:" required>
                     </div>
-                    <div class="form-group my-4">
-                        <label for="borrow_librarian_id">Librarian:</label>
-                        <select class="form-control" name="borrow_librarian_id" id="borrow_librarian_id" required>
-                            <option value="">Select Librarian</option>
-                            <!-- Populate with librarian data from the database -->
-                            <?php
-                            $librarian_query = "SELECT librarian_id, name FROM librarians";
-                            $librarian_result = mysqli_query($conn, $librarian_query);
-                            while ($librarian = mysqli_fetch_assoc($librarian_result)) {
-                                echo "<option value='{$librarian['librarian_id']}'>{$librarian['name']}</option>";
-                            }
-                            ?>
-                        </select>
-                    </div>
+                   
+                    <input type="hidden" name="borrow_librarian_id" value="<?php echo $_SESSION['librarian_id']; ?>">
+                    <!-- Add a hidden input field with the librarian's ID -->
+                    <!-- This will automatically populate the librarian's ID in the form -->
                     <div class="form-group my-4">
                         <label for="statuss">Status:</label>
                         <select class="form-control" name="statuss" id="statuss">

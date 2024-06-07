@@ -1,7 +1,9 @@
 <?php
 session_start();
+include('includes/connect.php'); // Include the database connection file
+
 // Check if admin is already logged in, redirect to index.php if yes
-if(isset($_SESSION['admin'])) {
+if (isset($_SESSION['admin'])) {
     header("Location: index1.php");
     exit();
 }
@@ -9,23 +11,29 @@ if(isset($_SESSION['admin'])) {
 $error = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    $username = mysqli_real_escape_string($conn, $_POST['username']);
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
 
-    // Replace with your actual admin username and password
-    $admin_username = 'admin';
-    $admin_password = 'adminpassword';
+    // Query to get the admin details
+    $query = "SELECT * FROM admin WHERE username = '$username'";
+    $result = mysqli_query($conn, $query);
 
-    if ($username == $admin_username && $password == $admin_password) {
-        $_SESSION['admin'] = $username;
-        header("Location: index1.php");
-        exit();
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+
+        // Verify password
+        if (md5($password) == $row['password']) { // assuming passwords are stored as md5 hash
+            $_SESSION['admin'] = $row['username'];
+            header("Location: index1.php");
+            exit();
+        } else {
+            $error = 'Invalid Username or Password';
+        }
     } else {
         $error = 'Invalid Username or Password';
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

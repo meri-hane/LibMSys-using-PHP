@@ -1,54 +1,45 @@
 <?php
-session_start(); // Start the session before any output
+session_start();
 include('includes/connect.php');
-// Check if admin is not logged in, redirect to login.php if not
+
 if(!isset($_SESSION['admin'])) {
     header("Location: login.php");
     exit();
 }
 
-// Define how many results you want per page
 $results_per_page = 10;
-
-// Handle search query
 $search_query = '';
 if (isset($_GET['search'])) {
     $search_query = mysqli_real_escape_string($conn, $_GET['search']);
 }
 
-// Handle sorting
-$sort_field = 'book_id'; // Default sort field
-$sort_order = 'ASC'; // Default sort order
+$sort_field = 'book_id';
+$sort_order = 'ASC';
 if (isset($_GET['sort_field']) && isset($_GET['sort_order'])) {
     $sort_field = mysqli_real_escape_string($conn, $_GET['sort_field']);
     $sort_order = mysqli_real_escape_string($conn, $_GET['sort_order']) == 'ASC' ? 'ASC' : 'DESC';
 }
 
-// Find out the number of results stored in database
 $sql = "SELECT COUNT(checkout_id) AS total FROM checkouts";
 if ($search_query != '') {
-    $sql .= " WHERE book_id LIKE '%$search_query%' OR member_id LIKE '%$search_query%' OR borrow_date LIKE '%$search_query%' OR return_date LIKE '%$search_query%' OR statuss LIKE '%$search_query%'";
+    $sql .= " WHERE books.title LIKE '%$search_query%' OR members.lname LIKE '%$search_query%' OR borrow_date LIKE '%$search_query%' OR return_date LIKE '%$search_query%' OR statuss LIKE '%$search_query%'";
 }
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 $total_results = $row['total'];
 
-// Determine number of total pages available
 $total_pages = ceil($total_results / $results_per_page);
 
-// Determine which page number visitor is currently on
-$page = 1; // Default page
+$page = 1;
 if (isset($_GET['page']) && is_numeric($_GET['page']) && $_GET['page'] > 0) {
     $page = (int)$_GET['page'];
     if ($page > $total_pages) {
-        $page = $total_pages; // Cap at the maximum page number
+        $page = $total_pages;
     }
 }
 
-// Determine the sql LIMIT starting number for the results on the displaying page
 $starting_limit = ($page - 1) * $results_per_page;
 
-// Retrieve selected results from database and display them on page
 $sql = "SELECT checkouts.*, books.title AS book_title, members.lname AS member_lname, 
             borrow_librarian.name AS borrow_librarian_name, return_librarian.name AS return_librarian_name 
         FROM checkouts 
@@ -61,9 +52,8 @@ if ($search_query != '') {
 }
 $sql .= " ORDER BY $sort_field $sort_order LIMIT $starting_limit, $results_per_page";
 $result = mysqli_query($conn, $sql);
-
-
 ?>
+
 
 <body>
 <?php include 'includes/header.php'; ?>
@@ -236,10 +226,13 @@ $result = mysqli_query($conn, $sql);
             <div class="modal-body">
                 <form action="processcheckout.php" method="post">
                     <div class="form-element my-4">
-                        <input type="text" class="form-control" name="book_isbn" placeholder="Book ISBN:" required>
+                    <input type="text" id="book-title-input" name="book_title" class="form-control" placeholder="Type to search book title...">
+<div id="book-title-list"></div>
+
                     </div>
                     <div class="form-element my-4">
-                        <input type="text" class="form-control" name="member_id" placeholder="Member ID:" required>
+                    <input type="text" id="member-name-input" name="member_name" class="form-control" placeholder="Type to search member name...">
+                    <div id="member-name-list"></div>
                     </div>
                     <div class="form-group my-4">
                         <input type="text" class="form-control" name="borrow_date" id="borrow_date" placeholder="Borrow Date:" required>
@@ -265,7 +258,7 @@ $result = mysqli_query($conn, $sql);
                         </select>
                     </div>
                     <div class="form-element my-4">
-                        <input type="submit" name="create" value="Add Transaction" class="btn btn-primary">
+                        <input type="submit" name="create" value="Add Transaction" class="btn btn-pink">
                     </div>
                 </form>
             </div>
@@ -281,6 +274,76 @@ $(document).ready(function(){
         autoclose: true,
         todayHighlight: true
     });
+});
+</script>
+
+<script>
+document.getElementById("book-title-input").addEventListener("input", function() {
+    var input = this.value;
+    if (input.trim().length === 0) {
+        document.getElementById("book-title-list").style.display = "none";
+        return;
+    }
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+            var list = document.getElementById("book-title-list");
+            list.innerHTML = this.responseText;
+            if (this.responseText.trim() !== "") {
+                list.style.display = "block";
+            } else {
+                list.style.display = "none";
+            }
+        }
+    };
+    xmlhttp.open("GET", "autocomplete.php?q=" + input, true);
+    xmlhttp.send();
+});
+
+document.addEventListener("click", function(e) {
+    var list = document.getElementById("book-title-list");
+    var input = document.getElementById("book-title-input");
+    if (!list.contains(e.target)) {
+        list.style.display = "none";
+    } else {
+        input.value = e.target.textContent;
+        list.style.display = "none";
+    }
+});
+</script>
+
+<script>
+document.getElementById("member-name-input").addEventListener("input", function() {
+    var input = this.value;
+    if (input.trim().length === 0) {
+        document.getElementById("member-name-list").style.display = "none";
+        return;
+    }
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+            var list = document.getElementById("member-name-list");
+            list.innerHTML = this.responseText;
+            if (this.responseText.trim() !== "") {
+                list.style.display = "block";
+            } else {
+                list.style.display = "none";
+            }
+        }
+    };
+    xmlhttp.open("GET", "autocomplete_member.php?q=" + input, true);
+    xmlhttp.send();
+});
+
+document.addEventListener("click", function(e) {
+    var list = document.getElementById("member-name-list");
+    var input = document.getElementById("member-name-input");
+    if (!list.contains(e.target)) {
+        list.style.display = "none";
+    } else {
+        input.value = e.target.textContent;
+        list.style.display = "none";
+    }
 });
 </script>
 

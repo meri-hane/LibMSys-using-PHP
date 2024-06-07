@@ -1,3 +1,19 @@
+<?php
+session_start(); // Start the session before any output
+include('includes/connect.php');
+// Check if librarian is not logged in, redirect to login page
+if (!isset($_SESSION['librarian_id'])) {
+    header('Location: login.php');
+    exit();
+}
+
+// Retrieve librarian's name
+$librarian_id = $_SESSION['librarian_id'];
+$query_librarian = "SELECT name FROM librarians WHERE librarian_id = '$librarian_id'";
+$result_librarian = mysqli_query($conn, $query_librarian);
+$row_librarian = mysqli_fetch_assoc($result_librarian);
+$librarian_name = $row_librarian['name'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -107,20 +123,10 @@
                 <label for="return_date">Return Date:</label>
                 <input type="text" class="form-control datepicker" name="return_date" id="return_date" value="<?php echo $row['return_date']; ?>" placeholder="Return Date" required>
             </div>
-            <div class="form-group my-4">
-                <label for="return_librarian_id">Librarian Received:</label>
-                <select class="form-control" name="return_librarian_id" id="return_librarian_id" required>
-                    <option value="">Select Librarian</option>
-                    <?php
-                    $librarian_query = "SELECT librarian_id, name FROM librarians";
-                    $librarian_result = mysqli_query($conn, $librarian_query);
-                    while ($librarian = mysqli_fetch_assoc($librarian_result)) {
-                        $selected = ($librarian['librarian_id'] == $row['return_librarian_id']) ? 'selected' : '';
-                        echo "<option value='{$librarian['librarian_id']}' $selected>{$librarian['name']}</option>";
-                    }
-                    ?>
-                </select>
-            </div>
+            <input type="hidden" name="return_librarian_id" value="<?php echo $librarian_id; ?>">
+
+</div>
+
             <div class="form-group my-4">
                 <label for="statuss">Status:</label>
                 <select class="form-control" name="statuss" id="statuss" required>

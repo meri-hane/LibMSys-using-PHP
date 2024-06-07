@@ -45,12 +45,6 @@
       </a>
     </li>
 
-
-    <li class="nav-item">
-    <a class="nav-link collapsed" href="librarian.php">
-        <i class="bi bi-layout-text-window-reverse"></i><span>Librarian</span>
-      </a>
-    </li><!-- End Tables Nav --><!-- End Tables Nav -->
   </ul>
 
 </aside>

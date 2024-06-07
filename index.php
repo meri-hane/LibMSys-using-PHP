@@ -2,7 +2,6 @@
 // Start session
 session_start();
 
-
 // Include database connection
 include('includes/connection.php');
 
@@ -79,10 +78,10 @@ $result = mysqli_query($conn, $sql);
 
     <style>
         body {
-  padding-top: 110px; /* Adjust as needed */
-  color: #000; /* Black text */
-}
-        </style>
+            padding-top: 110px; /* Adjust as needed */
+            color: #000; /* Black text */
+        }
+    </style>
 </head>
 <body>
 
@@ -90,94 +89,146 @@ $result = mysqli_query($conn, $sql);
 <link rel="stylesheet" href="assets/css/templatemo-softy-pinko.css">
 
 <header id="header" class="header fixed-top d-flex align-items-center justify-content-between">
-  <!-- Logo pic -->
-  <img src="assets/img/new_logo.png" alt="Logo" class="logo-pic">
+    <!-- Logo pic -->
+    <img src="assets/img/new_logo.png" alt="Logo" class="logo-pic">
 
-  <!-- Navigation Links -->
-  <nav class="main-nav">
-    <ul class="nav justify-content-center">
-      <li class="nav-item">
-      <a class="nav-link" href="members/login.php" style="color: black;">Member Login</a>
-      </li>
-      <li class="nav-item">
-      <a class="nav-link" href="librarians/login.php" style="color: black;">Librarian Login</a>
-      </li>
-      <li class="nav-item">
-      <a class="nav-link" href="admin/login.php" style="color: black;">Admin Login</a>
-      </li>
-    </ul>
-  </nav>
-
-
-</header>
-
-
-
-<header class="d-flex justify-content-between align-items-center my-4">
-        <h2>Welcome, <?php echo $member_name; ?></h2>
-    </header>
-  
-
-  <div class="container my-4">
-  <div class="d-flex justify-content-between align-items-center my-4">
-    <h2>Welcome, <?php echo $member_name; ?></h2>
-    <form method="GET" action="home.php" class="me-2">
-      <div class="input-group">
-        <input type="text" name="search" class="form-control" placeholder="Search for books..." value="<?php echo htmlspecialchars($search_query); ?>">
-        <button type="submit" class="btn btn-pink">Search</button>
-      </div>
-    </form>
-  </div>
-    <?php
-    $start_result = $starting_limit + 1;
-    $end_result = min($starting_limit + $results_per_page, $total_results);
-    ?>
-    
-    <table class="table table-bordered table-girly"> <!-- Added girly table styling -->
-      <colgroup>
-    <col style="width: 20%;">
-    <col style="width: 20%;">
-    <col style="width: 25%;">
-    <col style="width: 20%;">
-</colgroup>
-        <thead>
-            <tr>
-                <th><a href="?<?php echo http_build_query(array_merge($_GET, ['sort_field' => 'title', 'sort_order' => ($sort_field == 'title' && $sort_order == 'ASC') ? 'DESC' : 'ASC'])); ?>" class="sort-link">Title<?php echo $sort_field == 'title' ? ($sort_order == 'ASC' ? ' <i class="fa fa-arrow-up sort-icon"></i>' : ' <i class="fa fa-arrow-down sort-icon"></i>') : ''; ?></a></th>
-                <th><a href="?<?php echo http_build_query(array_merge($_GET, ['sort_field' => 'author', 'sort_order' => ($sort_field == 'author' && $sort_order == 'ASC') ? 'DESC' : 'ASC'])); ?>" class="sort-link">Author<?php echo $sort_field == 'author' ? ($sort_order == 'ASC' ? ' <i class="fa fa-arrow-up sort-icon"></i>' : ' <i class="fa fa-arrow-down sort-icon"></i>') : ''; ?></a></th>
-                <th><a href="?<?php echo http_build_query(array_merge($_GET, ['sort_field' => 'isbn', 'sort_order' => ($sort_field == 'isbn' && $sort_order == 'ASC') ? 'DESC' : 'ASC'])); ?>" class="sort-link">ISBN<?php echo $sort_field == 'isbn' ? ($sort_order == 'ASC' ? ' <i class="fa fa-arrow-up sort-icon"></i>' : ' <i class="fa fa-arrow-down sort-icon"></i>') : ''; ?></a></th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php
-        while($data = mysqli_fetch_array($result)){
-            ?>
-            <tr>
-                <td><?php echo $data['title']; ?></td>
-                <td><?php echo $data['author']; ?></td>
-                <td><?php echo substr($data['isbn'], 0, 15); ?></td> <!-- Limiting to 15 characters -->
-                <td>
-                    <a href="viewbook.php?id=<?php echo $data['book_id']; ?>" class="btn btn-pink">Read More</a> <!-- Changed to light pink button -->
-                </td>
-            </tr>
-            <?php
-        }
-        ?>
-        </tbody>
-    </table>
-
-    <nav class="pagination-container">
-    <p class="result-count">Showing <?php echo $start_result; ?> to <?php echo $end_result; ?> of <?php echo $total_results; ?> results</p>
-        <ul class="pagination">
-            <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-            <li class="page-item<?php if ($i == $page) echo ' active'; ?>">
-                <a class="page-link" href="?<?php echo http_build_query(array_merge($_GET, ['page' => $i])); ?>"><?php echo $i; ?></a>
+    <!-- Navigation Links -->
+    <nav class="main-nav">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link" href="members/login.php" style="color: black;">Member Login</a>
             </li>
-            <?php endfor; ?>
+            <li class="nav-item">
+                <a class="nav-link" href="librarians/login.php" style="color: black;">Librarian Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="admin/login.php" style="color: black;">Admin Login</a>
+            </li>
         </ul>
     </nav>
+</header>
 
+<header class="d-flex justify-content-between align-items-center my-4">
+    <h2>Welcome, <?php echo $member_name; ?></h2>
+</header>
+
+<div class="container my-4">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="d-flex justify-content-between align-items-center my-4">
+                <h2>Welcome, <?php echo $member_name; ?></h2>
+                <form method="GET" action="home.php" class="me-2">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control" placeholder="Search for books..." value="<?php echo htmlspecialchars($search_query); ?>">
+                        <button type="submit" class="btn btn-pink">Search</button>
+                    </div>
+                </form>
             </div>
+            <?php
+            $start_result = $starting_limit + 1;
+            $end_result = min($starting_limit + $results_per_page, $total_results);
+            ?>
 
+            <table class="table table-bordered table-girly"> <!-- Added girly table styling -->
+                <colgroup>
+                    <col style="width: 20%;">
+                    <col style="width: 20%;">
+                    <col style="width: 25%;">
+                    <col style="width: 20%;">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th><a href="?<?php echo http_build_query(array_merge($_GET, ['sort_field' => 'title', 'sort_order' => ($sort_field == 'title' && $sort_order == 'ASC') ? 'DESC' : 'ASC'])); ?>" class="sort-link">Title<?php echo $sort_field == 'title' ? ($sort_order == 'ASC' ? ' <i class="fa fa-arrow-up sort-icon"></i>' : ' <i class="fa fa-arrow-down sort-icon"></i>') : ''; ?></a></th>
+                    <th><a href="?<?php echo http_build_query(array_merge($_GET, ['sort_field' => 'author', 'sort_order' => ($sort_field == 'author' && $sort_order == 'ASC') ? 'DESC' : 'ASC'])); ?>" class="sort-link">Author<?php echo $sort_field == 'author' ? ($sort_order == 'ASC' ? ' <i class="fa fa-arrow-up sort-icon"></i>' : ' <i class="fa fa-arrow-down sort-icon"></i>') : ''; ?></a></th>
+                    <th><a href="?<?php echo http_build_query(array_merge($_GET, ['sort_field' => 'isbn', 'sort_order' => ($sort_field == 'isbn' && $sort_order == 'ASC') ? 'DESC' : 'ASC'])); ?>" class="sort-link">ISBN<?php echo $sort_field == 'isbn' ? ($sort_order == 'ASC' ? ' <i class="fa fa-arrow-up sort-icon"></i>' : ' <i class="fa fa-arrow-down sort-icon"></i>') : ''; ?></a></th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                while ($data = mysqli_fetch_array($result)) {
+                    ?>
+                    <tr>
+                        <td><?php echo $data['title']; ?></td>
+                        <td><?php echo $data['author']; ?></td>
+                        <td><?php echo substr($data['isbn'], 0, 15); ?></td> <!-- Limiting to 15 characters -->
+                        <td>
+                            <a href="viewbook.php?id=<?php echo $data['book_id']; ?>" class="btn btn-pink">Read More</a> <!-- Changed to light pink button -->
+                        </td>
+                    </tr>
+                    <?php
+                }
+                ?>
+                </tbody>
+            </table>
+
+            <nav class="pagination-container">
+                <p class="result-count">Showing <?php echo $start_result; ?> to <?php echo $end_result; ?> of <?php echo $total_results; ?> results</p>
+                <ul class="pagination">
+                    <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                        <li class="page-item<?php if ($i == $page) echo ' active'; ?>">
+                            <a class="page-link" href="?<?php echo http_build_query(array_merge($_GET, ['page' => $i])); ?>"><?php echo $i; ?></a>
+                        </li>
+                    <?php endfor; ?>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Recommendations Card -->
+        <div class="col-lg-4 mt-4">
+        <div class="card border-primary">
+    <div class="card-body">
+        <div class="d-flex align-items-center mb-3">
+
+            <div>
+                <h5 class="card-title mb-0">📢 DON'T KNOW WHAT TO READ?</h5>
+            </div>
+        </div>
+
+        <hr class="mb-3">
+
+        <div class="top-books mb-4">
+            <h6 style="font-family: 'Poppins', sans-serif;">📘 Categories:</h6>
+            <ul class="list-unstyled mb-0">
+                <li style="font-family: 'Nunito', sans-serif;"><strong>🌟 Top Book:</strong> The Great Gatsby</li>
+                <li style="font-family: 'Nunito', sans-serif;"><strong>😢 Books that will make you cry:</strong> Design and Analysis of Algorithm</li>
+                <li style="font-family: 'Nunito', sans-serif;"><strong>📺 Anime:</strong> Naruto: The Seventh Hokage and the Scarlet Spring</li>
+                <li style="font-family: 'Nunito', sans-serif;"><strong>💼 Self Help:</strong> The 7 Habits of Highly Effective People</li>
+            </ul>
+        </div>
+
+        <hr class="mb-4">
+
+        <div class="top-books-year mb-4">
+            <h6 style="font-family: 'Poppins', sans-serif;">🏆 Top 3 Books of the Year:</h6>
+            <ol class="list-unstyled mb-0">
+                <li style="font-family: 'Nunito', sans-serif;"><strong>1️⃣ </strong> Untamed by Glennon Doyle</li>
+                <li style="font-family: 'Nunito', sans-serif;"><strong>2️⃣ </strong> The Vanishing Half by Brit Bennett</li>
+                <li style="font-family: 'Nunito', sans-serif;"><strong>3️⃣ </strong> Where the Crawdads Sing by Delia Owens</li>
+            </ol>
+        </div>
+
+        <hr class="mt-4">
+
+        <div class="mind-blowing-trivia mt-4">
+            <h6 style="font-family: 'Poppins', sans-serif;">💡 Mind-Blowing Trivia:</h6>
+            <ul class="list-unstyled mb-0">
+                <li style="font-family: 'Nunito', sans-serif;"><strong>🚀 Did you know?</strong> The longest novel ever written is "In Search of Lost Time" by Marcel Proust, with over 4,000 pages!</li>
+                <li style="font-family: 'Nunito', sans-serif;"><strong>🎉 Fun Fact:</strong> Reading can reduce stress levels by up to 68%.</li>
+                <li style="font-family: 'Nunito', sans-serif;"><strong>💡 Did you know?</strong> Reading can increase empathy and improve relationships with others.</li>
+                <li style="font-family: 'Nunito', sans-serif;"><strong>🧠 Fun Fact:</strong> Regular reading can slow down cognitive decline and keep your brain sharp as you age.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Bootstrap 5 JS scripts -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-NW5nPmFg3wpvqbJUKLrZ5WKXhh3ZbXCqz8wZpR92lEtnYQjOqADaJVh04uZCZ6PC" crossorigin="anonymous"></script>
 </body>
 </html>
