@@ -1,3 +1,4 @@
+//Since passwords should be kept confidential, it's a common practice to avoid displaying them directly in the user interface.
 <?php
 include('includes/connect.php');
 session_start(); // Add session start
@@ -112,7 +113,7 @@ $result = mysqli_query($conn, $sql);
 
       <!-- Librarian Table -->
       <table class="table table-bordered table-girly">
-        <colgroup>
+      <colgroup>
           <col style="width: 5%;">
           <col style="width: 20%;">
           <col style="width: 20%;">

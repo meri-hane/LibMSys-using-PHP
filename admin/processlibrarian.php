@@ -13,10 +13,14 @@ if (isset($_POST["create"])) {
         // If a duplicate entry is found, display an error message
         $_SESSION["error"] = "A librarian with the same name already exists!";
     } else {
+        // Generate and hash password
+        $password = 'lib' . date('Y');
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        
         // Insert the new librarian into the database
-        $sqlInsert = "INSERT INTO librarians(name) VALUES ('$name')";
+        $sqlInsert = "INSERT INTO librarians(name, password) VALUES ('$name', '$hashed_password')";
         if (mysqli_query($conn, $sqlInsert)) {
-            $_SESSION["create"] = "Librarian Added Successfully!";
+            $_SESSION["create"] = "Librarian added successfully. Initial password: $password";
         } else {
             $_SESSION["error"] = "Error adding librarian!";
         }
@@ -33,8 +37,8 @@ if (isset($_POST["edit"])) {
     $sqlCheckDuplicate = "SELECT * FROM librarians WHERE LOWER(name) = LOWER('$name') AND librarian_id != '$librarian_id'";
     $resultCheckDuplicate = mysqli_query($conn, $sqlCheckDuplicate);
 
-      // Update the librarian in the database
-      $sqlUpdate = "UPDATE librarians SET name = '$name' WHERE librarian_id='$librarian_id'";
+    // Update the librarian in the database
+    $sqlUpdate = "UPDATE librarians SET name = '$name' WHERE librarian_id='$librarian_id'";
 
     if (mysqli_num_rows($resultCheckDuplicate) > 0) {
         // If a duplicate entry is found, display an error message
@@ -42,7 +46,6 @@ if (isset($_POST["edit"])) {
         header("Location: librarian.php");
         exit();
     } else {
-      
         if (mysqli_query($conn, $sqlUpdate)) {
             $_SESSION["update"] = "Librarian Updated Successfully!";
             header("Location: librarian.php");
@@ -54,5 +57,4 @@ if (isset($_POST["edit"])) {
         }
     }
 }
-
 ?>

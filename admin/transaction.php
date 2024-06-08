@@ -214,7 +214,7 @@ $result = mysqli_query($conn, $sql);
                 <?php endfor; ?>
             </ul>
         </nav>
-       <!-- Modal Structure ADD -->
+      
   <!-- Modal Structure ADD -->
 <div class="modal fade" id="addCheckoutModal" tabindex="-1" aria-labelledby="addCheckoutModalLabel" aria-hidden="true">
     <div class="modal-dialog">
