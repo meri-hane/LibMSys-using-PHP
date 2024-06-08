@@ -2,44 +2,54 @@
 session_start();
 include('includes/connect.php');
 
-if(!isset($_SESSION['admin'])) {
+if (!isset($_SESSION['admin'])) {
     header("Location: login.php");
     exit();
 }
 
+
+// Define how many results you want per page
 $results_per_page = 10;
+
+// Handle search query
 $search_query = '';
 if (isset($_GET['search'])) {
     $search_query = mysqli_real_escape_string($conn, $_GET['search']);
 }
 
-$sort_field = 'book_id';
-$sort_order = 'ASC';
+// Handle sorting
+$sort_field = 'book_id'; // Default sort field
+$sort_order = 'ASC'; // Default sort order
 if (isset($_GET['sort_field']) && isset($_GET['sort_order'])) {
     $sort_field = mysqli_real_escape_string($conn, $_GET['sort_field']);
     $sort_order = mysqli_real_escape_string($conn, $_GET['sort_order']) == 'ASC' ? 'ASC' : 'DESC';
 }
 
+// Find out the number of results stored in database
 $sql = "SELECT COUNT(checkout_id) AS total FROM checkouts";
 if ($search_query != '') {
-    $sql .= " WHERE books.title LIKE '%$search_query%' OR members.lname LIKE '%$search_query%' OR borrow_date LIKE '%$search_query%' OR return_date LIKE '%$search_query%' OR statuss LIKE '%$search_query%'";
+    $sql .= " WHERE book_id LIKE '%$search_query%' OR member_id LIKE '%$search_query%' OR borrow_date LIKE '%$search_query%' OR return_date LIKE '%$search_query%' OR statuss LIKE '%$search_query%'";
 }
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 $total_results = $row['total'];
 
+// Determine number of total pages available
 $total_pages = ceil($total_results / $results_per_page);
 
-$page = 1;
+// Determine which page number visitor is currently on
+$page = 1; // Default page
 if (isset($_GET['page']) && is_numeric($_GET['page']) && $_GET['page'] > 0) {
     $page = (int)$_GET['page'];
     if ($page > $total_pages) {
-        $page = $total_pages;
+        $page = $total_pages; // Cap at the maximum page number
     }
 }
 
+// Determine the sql LIMIT starting number for the results on the displaying page
 $starting_limit = ($page - 1) * $results_per_page;
 
+// Retrieve selected results from database and display them on page
 $sql = "SELECT checkouts.*, books.title AS book_title, members.lname AS member_lname, 
             borrow_librarian.name AS borrow_librarian_name, return_librarian.name AS return_librarian_name 
         FROM checkouts 
@@ -52,12 +62,26 @@ if ($search_query != '') {
 }
 $sql .= " ORDER BY $sort_field $sort_order LIMIT $starting_limit, $results_per_page";
 $result = mysqli_query($conn, $sql);
+
+
 ?>
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-<body>
+  <title>Transaction</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  
+  <link href="assets/img/LMS.png" rel="icon">
+</head>
 <?php include 'includes/header.php'; ?>
 <link rel="stylesheet" href="assets/css/templatemo-softy-pinko.css">
+<body>
+
 
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
@@ -276,6 +300,7 @@ $(document).ready(function(){
     });
 });
 </script>
+
 
 <script>
 document.getElementById("book-title-input").addEventListener("input", function() {

@@ -73,9 +73,23 @@ $result = mysqli_query($conn, $sql);
 
 ?>
 
-<body>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Transaction</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  
+  <link href="assets/img/LMS.png" rel="icon">
+</head>
 <?php include 'includes/header.php'; ?>
 <link rel="stylesheet" href="assets/css/templatemo-softy-pinko.css">
+
+<body>
 
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
@@ -253,7 +267,7 @@ $result = mysqli_query($conn, $sql);
                         </select>
                     </div>
                     <div class="form-element my-4">
-                        <input type="submit" name="create" value="Add Transaction" class="btn btn-primary">
+                        <input type="submit" name="create" value="Add Transaction" class="btn btn-pink">
                     </div>
                 </form>
             </div>

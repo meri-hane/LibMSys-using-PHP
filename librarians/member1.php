@@ -56,6 +56,18 @@ $sql .= " ORDER BY $sort_field $sort_order LIMIT $starting_limit, $results_per_p
 $result = mysqli_query($conn, $sql);
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Member</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  
+  <link href="assets/img/LMS.png" rel="icon">
 </head>
 <?php include 'includes/header.php'; ?>
 <link rel="stylesheet" href="assets/css/templatemo-softy-pinko.css">
@@ -217,7 +229,7 @@ $result = mysqli_query($conn, $sql);
                 </select>
             </div>
                             <div class="form-element my-4">
-                                <input type="submit" name="create" value="Add Member" class="btn btn-primary">
+                                <input type="submit" name="create" value="Add Member" class="btn btn-pink">
                             </div>
                         </form>
                     </div>

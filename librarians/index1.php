@@ -169,8 +169,8 @@ while ($row = mysqli_fetch_assoc($resultMembershipCount)) {
       <div class="card-body">
         <h5 class="card-title">Books <span>| Total</span></h5>
         <div class="d-flex align-items-center">
-          <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-            <i class="bi bi-book"></i>
+        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center" style="background-color: rgba(209, 160, 255, 0.3);">
+        <i class="bi bi-book" style="color: #9775fa;"></i>
           </div>
           <div class="ps-3">
             <h6><?php echo $countBooks; ?></h6>
@@ -186,8 +186,8 @@ while ($row = mysqli_fetch_assoc($resultMembershipCount)) {
       <div class="card-body">
         <h5 class="card-title">Members <span>| Total</span></h5>
         <div class="d-flex align-items-center">
-          <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-            <i class="bi bi-person"></i>
+        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center" style="background-color: rgba(255, 204, 204, 0.4);">
+        <i class="bi bi-person" style="color: #ff6699;"></i>
           </div>
           <div class="ps-3">
             <h6><?php echo $countMembers; ?></h6>
@@ -203,8 +203,8 @@ while ($row = mysqli_fetch_assoc($resultMembershipCount)) {
       <div class="card-body">
         <h5 class="card-title">Checkout <span>| Total</span></h5>
         <div class="d-flex align-items-center">
-          <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-            <i class="bi bi-journal-check"></i>
+        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center" style="background-color: rgba(209, 160, 255, 0.3);">
+        <i class="bi bi-book" style="color: #9775fa;"></i>
           </div>
           <div class="ps-3">
             <h6><?php echo $countCheckouts; ?></h6>
@@ -212,7 +212,7 @@ while ($row = mysqli_fetch_assoc($resultMembershipCount)) {
         </div>
       </div>
     </div>
-  </div><!-- End Checkouts Card --
+  </div><!-- End Checkouts Card -->
 
           <!-- Reports -->
           <div class="col-12">
@@ -263,7 +263,7 @@ while ($row = mysqli_fetch_assoc($resultMembershipCount)) {
                               }
                             }
                           },
-                          colors: ['#4154f1', '#2eca6a'],
+                          colors: ['#ff69b4', '#dac0f1'],
                           tooltip: {
                             x: {
                               formatter: function(val) {

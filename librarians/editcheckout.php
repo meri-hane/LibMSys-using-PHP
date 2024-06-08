@@ -32,7 +32,7 @@ $librarian_name = $row_librarian['name'];
 </head>
 
 <?php include 'includes/header.php'; ?>
-<link rel="stylesheet" href="assets/css/templatemo-softy-pinko.css"
+<link rel="stylesheet" href="assets/css/templatemo-softy-pinko.css">
 <body>
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
@@ -120,13 +120,10 @@ $librarian_name = $row_librarian['name'];
                 <span><?php echo $row['borrow_date']; ?></span>
             </div>
             <div class="form-group my-4">
-                <label for="return_date">Return Date:</label>
-                <input type="text" class="form-control datepicker" name="return_date" id="return_date" value="<?php echo $row['return_date']; ?>" placeholder="Return Date" required>
-            </div>
+                            <label for="return_date">Return Date:</label>
+                            <input type="text" class="form-control datepicker" name="return_date" id="return_date" value="<?php echo $row['return_date']; ?>" placeholder="Return Date" required>
+                        </div>
             <input type="hidden" name="return_librarian_id" value="<?php echo $librarian_id; ?>">
-
-</div>
-
             <div class="form-group my-4">
                 <label for="statuss">Status:</label>
                 <select class="form-control" name="statuss" id="statuss" required>
@@ -149,13 +146,13 @@ $librarian_name = $row_librarian['name'];
 </div>
 
 
-    <!-- Initialize Datepicker -->
-    <script>
-        $(document).ready(function(){
-            $('#borrow_date, #return_date').datepicker({
+ <!-- Initialize Flatpickr -->
+ <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            flatpickr(".datepicker", {
                 format: 'yyyy-mm-dd',
-                autoclose: true,
-                todayHighlight: true
+        autoclose: true,
+        todayHighlight: true
             });
         });
     </script>

@@ -58,10 +58,23 @@ $result = mysqli_query($conn, $sql);
 ?>
 
 
-<body>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Book</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  
+  <link href="assets/img/LMS.png" rel="icon">
+</head>
 <?php include 'includes/header.php'; ?>
 <link rel="stylesheet" href="assets/css/templatemo-softy-pinko.css">
 
+<body>
 
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
@@ -229,10 +242,10 @@ $result = mysqli_query($conn, $sql);
                                 <input type="text" class="form-control" name="isbn" placeholder="ISBN:" required>
                             </div>
                             <div class="form-element my-4">
-                                <textarea name="description" class="form-control" placeholder="Book Description:" required></textarea>
+                                <textarea name="description" class="form-control" placeholder="Book Description:"></textarea>
                             </div>
                             <div class="form-element my-4">
-                                <input type="submit" name="create" value="Add Book" class="btn btn-primary">
+                                <input type="submit" name="create" value="Add Book" class="btn btn-pink">
                             </div>
                         </form>
                     </div>

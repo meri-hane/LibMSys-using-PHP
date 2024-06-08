@@ -42,8 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Admin Login</title>
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
      <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="assets/img/LMS.png" rel="icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -60,6 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   <!-- Template Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/templatemo-softy-pinko.css">
 </head>
 <body>
 <main>
@@ -77,7 +77,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="card-body">
 
                 <div class="pt-4 pb-2">
-    <h5 class="card-title text-center pb-0 fs-4">Admin Login</h5>
+                <h5 class="card-title text-center pb-0 fs-4" style="color: rgb(199, 21, 133);">Admin Login</h5>
+
+
 </div>
 
 <?php if ($error): ?>
@@ -101,7 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="invalid-feedback">Please enter your password!</div>
     </div>
     <div class="col-md-12">
-        <button class="btn btn-primary w-100" type="submit">Login</button>
+        <button class="btn btn-pink w-100" type="submit">Login</button>
     </div>
 </form>
 

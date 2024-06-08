@@ -6,7 +6,7 @@ if (isset($_GET['id'])) {
     $sql = "DELETE FROM checkouts WHERE checkout_id='$checkout_id'";
     if(mysqli_query($conn, $sql)){
         session_start();
-        $_SESSION["delete"] = "Member Deleted Successfully!";
+        $_SESSION["delete"] = "Transaction Deleted Successfully!";
         header("Location: transaction.php");
     } else {
         die("Something went wrong");
