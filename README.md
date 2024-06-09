@@ -48,7 +48,7 @@ This system provides different functionalities based on the account's role.
 1. Open your MySQL command line or MySQL Workbench.
 2. Create a new database:
     ```sql
-    CREATE DATABASE library_db;
+    CREATE DATABASE crud;
     ```
 ### Step 4: Configure the Application
 ### Step 5: Start the Web Server
