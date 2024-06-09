@@ -11,6 +11,7 @@ Welcome to the Library Management System! This system is designed to manage the 
 - [Features](#features)
 - [Requirements](#requirements)
 - [Installation](#installation)
+- [System](#system)
 - [Troubleshooting](#troubleshooting)
 - [Contributing](#contributing)
 - [License](#license)
@@ -29,7 +30,7 @@ This system provides different functionalities based on the account's role.
 
 - **Member**
   - Can only view the signed-in account information
-  - Can view books
+  - Can view books and transactions
 
 ## Requirements
 - Web server (e.g., Apache)
@@ -39,23 +40,15 @@ This system provides different functionalities based on the account's role.
 - Editor (VS Code, Sublime Text, etc..)
 
 ## Installation
-### Step 1: Clone the Repository
-    ```bash
-    git clone https://github.com/meri-hane/crud.git
-    ```
+### Step 1: Clone the Repository: git clone https://github.com/meri-hane/crud.git
+ 
 ### Step 2: Navigate to the Project Directory
-    ```bash
-    cd library-management-system
-    ```
+
 ### Step 3: Set Up the Database
 1. Open your MySQL command line or MySQL Workbench.
 2. Create a new database:
     ```sql
     CREATE DATABASE library_db;
-    ```
-3. Import the database schema:
-    ```bash
-    mysql -u username -p library_db < database/schema.sql
     ```
 ### Step 4: Configure the Application
 ### Step 5: Start the Web Server
@@ -63,10 +56,13 @@ Ensure your web server is running and navigate to the project directory.
 
 ## System 
 
+![ezgif-4-057d5d13d3](https://github.com/meri-hane/crud/assets/92614961/82aa3e0a-9bf9-4b37-9bde-43727d1a361d)
+
+
 ## Troubleshooting
 
 ### Common Issues
-- **Database Connection Error**: Ensure your database credentials in `config.php` are correct.
+- **Database Connection Error**: Ensure your database credentials are correct.
 - **Page Not Found**: Verify your server configuration and ensure the project directory is correctly set up.
 - **Permission Errors**: Ensure the web server has appropriate permissions to read/write files in the project directory.
 
@@ -78,11 +74,9 @@ This project is licensed under the MIT License. See the `LICENSE` file for more 
 
 ---
 
-Thank you for using the Library Management System! If you have any questions or need further assistance, please contact us at support@example.com.
+Thank you for using the Library Management System! If you have any questions or need further assistance, please contact me at janecalulang@gmail.com
 
 
 
-- ### **phpMyAdmin database tables**
-![image](https://github.com/ChugxScript/CSE4_Project_-_SQL-PHP-Database/assets/101156843/a39e8bf2-0ddd-4c4c-91e8-4cc7ad306a89)
 
 
