@@ -11,9 +11,6 @@ Welcome to the Library Management System! This system is designed to manage the 
 - [Features](#features)
 - [Requirements](#requirements)
 - [Installation](#installation)
-- [Configuration](#configuration)
-- [Database Structure](#database-structure)
-- [Usage](#usage)
 - [Troubleshooting](#troubleshooting)
 - [Contributing](#contributing)
 - [License](#license)
@@ -43,63 +40,47 @@ This system provides different functionalities based on the account's role.
 
 ## Installation
 ### Step 1: Clone the Repository
-    ```sh
+    ```bash
     git clone https://github.com/meri-hane/crud.git
     ```
-Step 2: Navigate to the Project Directory
+### Step 2: Navigate to the Project Directory
+    ```bash
+    cd library-management-system
+    ```
+### Step 3: Set Up the Database
+1. Open your MySQL command line or MySQL Workbench.
+2. Create a new database:
+    ```sql
+    CREATE DATABASE library_db;
+    ```
+3. Import the database schema:
+    ```bash
+    mysql -u username -p library_db < database/schema.sql
+    ```
+### Step 4: Configure the Application
+### Step 5: Start the Web Server
+Ensure your web server is running and navigate to the project directory.
+
+## System 
+
+## Troubleshooting
+
+### Common Issues
+- **Database Connection Error**: Ensure your database credentials in `config.php` are correct.
+- **Page Not Found**: Verify your server configuration and ensure the project directory is correctly set up.
+- **Permission Errors**: Ensure the web server has appropriate permissions to read/write files in the project directory.
+
+## Contributing
+Contributions are welcome! Please fork the repository and submit a pull request with your changes. Ensure your code follows the project's coding standards and includes appropriate tests.
+
+## License
+This project is licensed under the MIT License. See the `LICENSE` file for more details.
+
+---
+
+Thank you for using the Library Management System! If you have any questions or need further assistance, please contact us at support@example.com.
 
 
-## USAGE
-
-1. Clone the repository:
-
-2. Install `XAMPP`.
-3. (Optional) Install `MySQL` and `MySQL Workbench` and create a user account.
-4. Start `Apache` and `MySQL` in `XAMPP`.
-5. Log in to `phpMyAdmin` using `localhost/phpmyadmin`.
-6. Install the `PHP Server` extension in VS Code.
-7. In `index.php`, select `PHP Server: Serve Project`.
-
-## DATABASE SCHEMA AND TASK
-
-- **Task:**
-  - Design a database schema to store information about students, advisors, departments, and courses.
-  - Establish relationships to represent academic advising.
-    
-- **Solution Database Schema:**
-  - **users**
-    - user_id (Primary Key)
-    - password (varchar)
-    - role (enum: 'admin', 'registrar', 'student', 'advisor')
-
-  - **student**
-    - student_id (Primary Key)
-    - advisor_id (Foreign Key Reference to `advisor_id` in `advisor` table)
-    - user_id (Foreign Key Reference to `user_id` in `users` table)
-    - first_name (varchar)
-    - last_name (varchar)
-    - assigned_sex (enum: 'Male', 'Female')
-
-  - **advisor**
-    - advisor_id (Primary Key)
-    - department_id (Foreign Key Reference to `department_id` in `department` table)
-    - user_id (Foreign Key Reference to `user_id` in `users` table)
-    - first_name (varchar)
-    - last_name (varchar)
-    - assigned_sex (enum: 'Male', 'Female')
-
-  - **department**
-    - department_id (Primary Key)
-    - department_name (varchar)
-    - course_id (Foreign Key Reference to `course_id` in `course` table)
-    - location (varchar)
-
-  - **course**
-    - course_id (Primary Key)
-    - course_name (varchar)
-    - credits (int)
-
-- ## SCREENSHOTS
 
 - ### **phpMyAdmin database tables**
 ![image](https://github.com/ChugxScript/CSE4_Project_-_SQL-PHP-Database/assets/101156843/a39e8bf2-0ddd-4c4c-91e8-4cc7ad306a89)
