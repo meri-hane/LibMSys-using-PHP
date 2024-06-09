@@ -67,7 +67,7 @@ $result = mysqli_query($conn, $sql);
   <meta content="" name="description">
   <meta content="" name="keywords">
   
-  <link href="assets/img/LMS.png" rel="icon">
+  <link href="admin/assets/img/new_logo.png" rel="icon">
 </head>
 <?php include 'includes/header.php'; ?>
 <link rel="stylesheet" href="assets/css/templatemo-softy-pinko.css">

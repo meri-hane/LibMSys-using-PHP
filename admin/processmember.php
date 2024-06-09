@@ -21,11 +21,14 @@ if (isset($_POST["create"])) {
         header("Location: member1.php");
         exit(); // Exit to prevent further execution
     } else {
+        // Generate and hash password
+        $password = 'mem' . date('Y');
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         // Insert the new member into the database
-        $sqlInsert = "INSERT INTO members(fname , lname , membership_type) VALUES ('$fname','$lname','$membership_type')";
+        $sqlInsert = "INSERT INTO members(fname , lname , membership_type, password) VALUES ('$fname','$lname','$membership_type', '$hashed_password')";
         if (mysqli_query($conn, $sqlInsert)) {
             session_start();
-            $_SESSION["create"] = "Member Added Successfully!";
+            $_SESSION["create"] = "Member Added Successfully! Initial password: $password";
             header("Location: member1.php");
             exit(); // Exit after successful insertion
         } else {

@@ -1,4 +1,17 @@
+<?php
+session_start(); // Start the session
+
+// Check if admin is already logged in, redirect to index.php if yes
+if (!isset($_SESSION['admin'])) {
+  header("Location: login.php");
+  exit();
+}
+
+include('includes/connect.php');
+
+?>
 <?php include 'includes/header.php'; ?>
+
 <link rel="stylesheet" href="assets/css/templatemo-softy-pinko.css">
 <body>
 <!-- ======= Sidebar ======= -->

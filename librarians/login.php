@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Librarian exists, fetch the record
         $row = mysqli_fetch_assoc($result);
         // Verify the hashed password
-        if (password_verify('lib' . date('Y'), $row['password'])) {
+        if (password_verify($password, $row['password'])) {
             // Password is correct, set session variable and redirect to index.php
             $_SESSION['librarian_id'] = $librarian_id;
             header("Location: index1.php");
@@ -42,6 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     mysqli_close($conn);
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

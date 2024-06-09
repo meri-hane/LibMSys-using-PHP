@@ -1,12 +1,14 @@
 <?php
-session_start();
-include('includes/connect.php'); // Include the database connection file
+
 
 // Check if admin is already logged in, redirect to index.php if yes
 if (isset($_SESSION['admin'])) {
     header("Location: index1.php");
     exit();
 }
+
+session_start();
+include('includes/connect.php'); // Include the database connection file
 
 $error = '';
 
@@ -22,15 +24,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $row = mysqli_fetch_assoc($result);
 
         // Verify password
-        if (md5($password) == $row['password']) { // assuming passwords are stored as md5 hash
+        if (md5($password) == $row['password']) { 
             $_SESSION['admin'] = $row['username'];
             header("Location: index1.php");
             exit();
         } else {
-            $error = 'Invalid Username or Password';
+            $error = 'Invalid Password';
         }
     } else {
-        $error = 'Invalid Username or Password';
+        $error = 'Invalid Username';
     }
 }
 ?>

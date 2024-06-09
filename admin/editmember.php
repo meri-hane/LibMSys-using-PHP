@@ -1,3 +1,15 @@
+<?php
+session_start(); // Start the session
+
+// Check if admin is already logged in, redirect to index.php if yes
+if (!isset($_SESSION['admin'])) {
+  header("Location: login.php");
+  exit();
+}
+
+include('includes/connect.php');
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

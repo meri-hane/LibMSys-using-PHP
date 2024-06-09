@@ -64,11 +64,13 @@ $result = mysqli_query($conn, $sql);
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <title>Book</title>
+  
   <meta content="" name="description">
   <meta content="" name="keywords">
   
-  <link href="assets/img/LMS.png" rel="icon">
+
 </head>
+<link href="assets/img/new_logo.png" rel="icon">
 <?php include 'includes/header.php'; ?>
 <link rel="stylesheet" href="assets/css/templatemo-softy-pinko.css">
 

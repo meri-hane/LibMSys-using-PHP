@@ -9,7 +9,7 @@ if (!isset($_SESSION['member_id'])) {
 }
 
 // Include database connection
-include('includes/connection.php');
+include('includes/connect.php');
 
 // Retrieve member's name
 $member_id = $_SESSION['member_id'];
@@ -73,6 +73,7 @@ $result = mysqli_query($conn, $sql);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,700,900" rel="stylesheet">
     <title>Home</title>
@@ -89,10 +90,10 @@ $result = mysqli_query($conn, $sql);
 }
         </style>
 </head>
-<body>
 
 <?php include 'includes/header.php'; ?>
 <link rel="stylesheet" href="assets/css/templatemo-softy-pinko.css">
+<body>
 
 <header id="header" class="header fixed-top d-flex align-items-center justify-content-between">
   <!-- Logo pic -->
@@ -161,18 +162,18 @@ $result = mysqli_query($conn, $sql);
         </thead>
         <tbody>
         <?php
-        while($data = mysqli_fetch_array($result)){
-            ?>
-            <tr>
-                <td><?php echo $data['title']; ?></td>
-                <td><?php echo $data['author']; ?></td>
-                <td><?php echo substr($data['isbn'], 0, 15); ?></td> <!-- Limiting to 15 characters -->
-                <td>
-                    <a href="viewbook.php?id=<?php echo $data['book_id']; ?>" class="btn btn-pink">Read More</a> <!-- Changed to light pink button -->
-                </td>
-            </tr>
-            <?php
-        }
+         while($data = mysqli_fetch_array($result)){
+          ?>
+          <tr>
+              <td><?php echo $data['title']; ?></td>
+              <td><?php echo $data['author']; ?></td>
+              <td><?php echo substr($data['isbn'], 0, 15); ?></td> <!-- Limiting to 15 characters -->
+              <td>
+                  <a href="viewbook.php?id=<?php echo $data['book_id']; ?>" class="btn btn-pink">Read More</a> <!-- Changed to light pink button -->
+              </td>
+          </tr>
+          <?php
+      }
         ?>
         </tbody>
     </table>

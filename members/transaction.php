@@ -9,7 +9,7 @@ if (!isset($_SESSION['member_id'])) {
 }
 
 // Include database connection
-include('includes/connection.php');
+include('includes/connect.php');
 
 // Retrieve member's borrowed and returned books
 // Retrieve member's name
@@ -50,6 +50,7 @@ $result = mysqli_query($conn, $query);
 <html>
 <head>
     <title>Transactions</title>
+    <link href="assets/img/LMS.png" rel="icon">
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <style>
         body {

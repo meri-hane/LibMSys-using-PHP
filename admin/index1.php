@@ -1,6 +1,14 @@
-<?php
-include('includes/connect.php');
 
+<?php
+session_start(); // Start the session
+
+// Check if admin is already logged in
+if (!isset($_SESSION['admin'])) {
+  header("Location: login.php");
+  exit();
+}
+
+include('includes/connect.php');
 // Fetch the counts from the database
 $sqlBooksCount = "SELECT COUNT(*) AS total_books FROM books";
 $sqlMembersCount = "SELECT COUNT(*) AS total_members FROM members";
