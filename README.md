@@ -58,7 +58,16 @@ Ensure your web server is running and navigate to the project directory.
 
 ### Admin
 ![Screenshot from 2024-06-09 23-33-34](https://github.com/meri-hane/crud/assets/92614961/b376d19d-b21e-4b53-960a-c16dcee3008d)
+### Library
+![Screenshot from 2024-06-09 23-39-41](https://github.com/meri-hane/crud/assets/92614961/b1c67658-912a-45c8-a3d8-99edfdde5c94)
+![Screenshot from 2024-06-09 23-39-51](https://github.com/meri-hane/crud/assets/92614961/6956b4ba-1db1-4910-979e-d18b360fc228)
 
+### Member
+![Screenshot from 2024-06-09 23-40-10](https://github.com/meri-hane/crud/assets/92614961/17eb8084-5fa7-4cad-bf4b-b6cfa2d2b6d0)
+![Uploading Screenshot from 2024-06-09 23-40-16.png…]()
+
+### Guest
+![Screenshot from 2024-06-09 23-39-05](https://github.com/meri-hane/crud/assets/92614961/b8993a22-1cd3-4f6b-89f8-f10e9668c7d9)
 
 ## Troubleshooting
 
