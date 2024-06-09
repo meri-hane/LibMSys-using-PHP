@@ -56,7 +56,8 @@ Ensure your web server is running and navigate to the project directory.
 
 ## System 
 
-![ezgif-4-057d5d13d3](https://github.com/meri-hane/crud/assets/92614961/82aa3e0a-9bf9-4b37-9bde-43727d1a361d)
+### Admin
+![Screenshot from 2024-06-09 23-33-34](https://github.com/meri-hane/crud/assets/92614961/b376d19d-b21e-4b53-960a-c16dcee3008d)
 
 
 ## Troubleshooting
